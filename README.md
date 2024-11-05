@@ -1,1 +1,1 @@
-# Automa-o-Pedidos-com-Python-e-BotCity
+# Automação e Gestão de Pedidos com Python e BotCity
