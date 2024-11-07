@@ -1,6 +1,6 @@
 from excecao import ValorInvalidoError
 
-# Antonio - minha parte
+
 class Produto:
     def __init__(self, nome, preco, categoria):
         if preco < 0:
@@ -11,3 +11,15 @@ class Produto:
 
     def detalhes(self):
         return f"{self.nome} - Categoria: {self.categoria} - Preço: {self.preco}"
+
+
+    def to_dict(self):
+        return {
+            "nome": self.nome,
+            "preco": self.preco,
+            "categoria": self.categoria
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["nome"], data["preco"], data["categoria"])

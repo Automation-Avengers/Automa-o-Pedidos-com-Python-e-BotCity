@@ -1,12 +1,9 @@
 from functools import reduce
 from typing import List, Dict
 from datetime import datetime
+import manipulacaoAquivo
+from pedido import Pedido
 
-class ValorInvalidoError(Exception):
-    pass
-
-class QuantidadeInvalidaError(Exception):
-    pass
 
 def log_atividade(func):
     def wrapper(*args, **kwargs):
@@ -14,35 +11,6 @@ def log_atividade(func):
         print(f"[LOG] {datetime.now()} - Executou: {func} | Args: {args[1:]} | Retorno: {result}")
         return result
     return wrapper
-
-class Produto:
-    def __init__(self, nome: str, preco: float, categoria: str):
-        if preco < 0:
-            raise ValorInvalidoError("O preço deve ser positivo.")
-        self.nome = nome
-        self.preco = preco
-        self.categoria = categoria
-    def detalhes(self):
-        return f"Produto: {self.nome}, Preço: R${self.preco}, Categoria: {self.categoria}"
-
-class Pedido:
-    def __init__(self, produtos: List[Produto], quantidade: Dict[Produto, int], cliente: str, status: str = "Novo"):
-        self.produtos = produtos
-        self.quantidade = quantidade
-        self.cliente = cliente
-        self.status = status
-    def total_pedido(self):
-        total = reduce(lambda acc, produto: acc + produto.preco * self.quantidade[produto], self.produtos, 0)
-        return total
-
-    def detalhes_pedido(self):
-        return {
-            "cliente": self.cliente,
-            "produtos": [{ "nome": p.nome, "quantidade": self.quantidade[p] } for p in self.produtos],
-            "status": self.status,
-            "total": self.total_pedido()
-        }
-
 
 class GestorDePedidos:
     def __init__(self):
@@ -63,45 +31,14 @@ class GestorDePedidos:
     def total_vendas(self):
         return reduce(lambda acc, pedido: acc + pedido.total_pedido(), self.pedidos, 0)
 
+    def salvar_dados_json(self, arquivo="pedidos.json"):
+        manipulacaoAquivo.salvar_dados_json(self.pedidos, arquivo)
 
+    def carregar_dados_json(self, arquivo="pedidos.json"):
+        self.pedidos = manipulacaoAquivo.carregar_dados_json(arquivo)
 
-try:
-    produto = Produto("Camisa", 50.0, "Vestuário")
-    print(produto.detalhes())  
-except Exception as e:
-    print(f"Erro inesperado: {e}")
+    def salvar_dados_binario(self, arquivo="pedidos.bin"):
+        manipulacaoAquivo.salvar_dados_binario(self.pedidos, arquivo)
 
-produto1 = Produto("Camisa", 50.0, "Vestuário")
-produto2 = Produto("Calça", 80.0, "Vestuário")
-produtos = [produto1, produto2]
-quantidade = {produto1: 2, produto2: 1}
-
-pedido = Pedido(produtos, quantidade, "Cliente1")
-print("Total do Pedido:", pedido.total_pedido()) 
-print("Detalhes do Pedido:", pedido.detalhes_pedido())
-
-gestor = GestorDePedidos()
-
-
-produto1 = Produto("Camisa", 50.0, "Vestuário")
-produto2 = Produto("Calça", 80.0, "Vestuário")
-produtos = [produto1, produto2]
-quantidade1 = {produto1: 2, produto2: 1}
-
-
-produto3 = Produto("Tênis", 110.0, "Vestuário")
-produto4 = Produto("Celular", 4500.0, "Eletrônico")
-produtos2 = [produto3, produto4]
-quantidade2 = {produto3: 2, produto4: 1}
-
-pedido = Pedido(produtos2, quantidade2, "Diego", status="Antigo")
-pedido2 = Pedido(produtos, quantidade1, "Jonas", status="Novo")
-gestor.adicionar_pedido(pedido)
-gestor.adicionar_pedido(pedido2)
-
-
-pedidos_novos = gestor.listar_pedidos_por_status("Novo")
-
-pedidos_antigo = gestor.listar_pedidos_por_status("Antigo")
-print("Pedidos com status 'Novo':", [p.detalhes_pedido() for p in pedidos_novos])
-print("Pedidos com status 'Antigo':", [p.detalhes_pedido() for p in pedidos_antigo])
+    def carregar_dados_binario(self, arquivo="pedidos.bin"):
+        self.pedidos = manipulacaoAquivo.carregar_dados_binario(arquivo)

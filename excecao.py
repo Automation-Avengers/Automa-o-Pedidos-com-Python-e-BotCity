@@ -4,3 +4,4 @@ class ValorInvalidoError(Exception):
 
 class QuantidadeInvalidaError(Exception):
     pass
+
