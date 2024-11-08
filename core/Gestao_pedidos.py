@@ -1,8 +1,8 @@
 from functools import reduce
 from typing import List, Dict
 from datetime import datetime
-import manipulacaoAquivo
-from pedido import Pedido
+from core.pedido import Pedido
+import core.manipulacaoAquivo
 
 
 def log_atividade(func):
@@ -32,13 +32,13 @@ class GestorDePedidos:
         return reduce(lambda acc, pedido: acc + pedido.total_pedido(), self.pedidos, 0)
 
     def salvar_dados_json(self, arquivo="pedidos.json"):
-        manipulacaoAquivo.salvar_dados_json(self.pedidos, arquivo)
+        core.manipulacaoAquivo.salvar_dados_json(self.pedidos, arquivo)
 
     def carregar_dados_json(self, arquivo="pedidos.json"):
-        self.pedidos = manipulacaoAquivo.carregar_dados_json(arquivo)
+        self.pedidos = core.manipulacaoAquivo.carregar_dados_json(arquivo)
 
     def salvar_dados_binario(self, arquivo="pedidos.pkl"):
-        manipulacaoAquivo.salvar_dados_binario(self.pedidos, arquivo)
+        core.manipulacaoAquivo.salvar_dados_binario(self.pedidos, arquivo)
 
     def carregar_dados_binario(self, arquivo="pedidos.pkl"):
-        self.pedidos = manipulacaoAquivo.carregar_dados_binario(arquivo)
+        self.pedidos = core.manipulacaoAquivo.carregar_dados_binario(arquivo)

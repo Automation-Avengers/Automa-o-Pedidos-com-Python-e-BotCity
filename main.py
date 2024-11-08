@@ -1,6 +1,7 @@
-from produto import Produto
-from pedido import Pedido
-from Gestao_pedidos import GestorDePedidos
+from core.Gestao_pedidos import GestorDePedidos
+from core.pedido import Pedido
+from core.produto import Produto
+
 
 def main():
     try:
