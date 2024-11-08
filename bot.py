@@ -34,6 +34,10 @@ def preencher_formulario(bot, pedido):
 
     print("\n" + pedido.detalhes_pedido())
 
+def mostrar_listagem_json(bot):
+    bot.browse("http://127.0.0.1:5000/listagem")
+    bot.sleep(3000)
+    
 def carregar_pedidos_csv(gestor, caminho_csv):
     with open(caminho_csv, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -95,10 +99,10 @@ def main():
     produto3 = Produto("Sapato", 100.0, "Calçado")
 
     quantidade1 = {produto1: 2, produto2: 1, produto3: 3}
-    pedido1 = Pedido([produto1, produto2, produto3], quantidade1, "Jonas", "Novo")
+    pedido1 = Pedido([produto1, produto2, produto3], quantidade1, "Yasmin", "Novo")
 
     quantidade2 = {produto1: 1, produto3: 4}
-    pedido2 = Pedido([produto1, produto3], quantidade2, "Maria", "Processando")
+    pedido2 = Pedido([produto1, produto3], quantidade2, "Ricardo", "Processando")
 
     gestor = GestorDePedidos()
     gestor.adicionar_pedido(pedido1)
@@ -110,7 +114,10 @@ def main():
     carregar_pedidos_xlsx(gestor, caminho_xlsx)
 
     gestor.salvar_dados_json()
-    
+    gestor.carregar_dados_json()
+    gestor.salvar_dados_binario()
+    gestor.carregar_dados_binario()
+
     bot = WebBot()
     bot.headless = False 
     bot.browser = Browser.CHROME
@@ -118,6 +125,8 @@ def main():
 
     for pedido in gestor.pedidos:
         preencher_formulario(bot, pedido)
+
+    mostrar_listagem_json(bot)
 
     bot.stop_browser()
 

@@ -80,28 +80,18 @@
                 <thead>
                     <tr>
                         <th>Produto</th>
-                        <th>Categoria</th>
                         <th>Preço (R$)</th>
                         <th>Quantidade</th>
                         <th>Total (R$)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% set total_pedido = 0 %}
                     {% for produto in pedido.produtos %}
                         {% set quantidade = pedido.quantidades[produto.nome] %}
-                        {% if quantidade is not none %}
-                            {% set subtotal = produto.preco * quantidade %}
-                            {% set total_pedido = total_pedido + subtotal %}
-                        {% else %}
-                            <tr>
-                                <td colspan="5">Erro: Quantidade de {{ produto.nome }} não encontrada.</td>
-                            </tr>
-                        {% endif %}
-
+                        {% set subtotal = produto.preco * quantidade %}
+                        
                         <tr>
                             <td>{{ produto.nome }}</td>
-                            <td>{{ produto.categoria }}</td>
                             <td>{{ produto.preco | round(2) }}</td>
                             <td>{{ quantidade }}</td>
                             <td>{{ subtotal | round(2) }}</td>
@@ -110,9 +100,8 @@
                 </tbody>
             </table>
 
-            <p class="total">Total do Pedido: R$ 
-                {{ total_pedido | round(2) }}
-            </p>
+            <!-- Agora o total é pego diretamente do JSON -->
+            <p class="total">Total do Pedido: R$ {{ pedido.total | round(2) }}</p>
         </div>
     {% endfor %}
 

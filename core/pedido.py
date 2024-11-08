@@ -26,7 +26,8 @@ class Pedido:
             "produtos": [produto.to_dict() for produto in self.produtos],
             "quantidades": {produto.nome: quantidade for produto, quantidade in self.quantidade.items()},
             "cliente": self.cliente,
-            "status": self.status
+            "status": self.status,
+            "total": self.total_pedido()
         }
 
     @classmethod

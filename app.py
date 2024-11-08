@@ -32,7 +32,7 @@ def formulario():
 
 @app.route('/listagem')
 def listagem():
-    with open('pedidos.json', 'r', encoding='utf-8') as f:
+    with open('data/pedidos.json', 'r', encoding='utf-8') as f:
         dados = json.load(f)
     
     return render_template('listagem.html', pedidos=dados)
