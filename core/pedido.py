@@ -1,7 +1,6 @@
 from functools import reduce
-from excecao import QuantidadeInvalidaError
-from produto import Produto
-
+from core.excecao import QuantidadeInvalidaError
+from core.produto import Produto
 
 class Pedido:
     def __init__(self, produtos, quantidade, cliente, status="Novo"):
@@ -22,7 +21,6 @@ class Pedido:
         detalhes += f"\nTotal: {self.total_pedido()}"
         return detalhes
 
-      # Método para converter o pedido para um dicionário
     def to_dict(self):
         return {
             "produtos": [produto.to_dict() for produto in self.produtos],
@@ -31,7 +29,6 @@ class Pedido:
             "status": self.status
         }
 
-    # Método para recriar um pedido a partir de um dicionário
     @classmethod
     def from_dict(cls, data):
         produtos = [Produto.from_dict(prod) for prod in data["produtos"]]

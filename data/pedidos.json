@@ -1,0 +1,42 @@
+[
+    {
+        "produtos": [
+            {
+                "nome": "Camisa",
+                "preco": 50.0,
+                "categoria": "Vestu\u00e1rio"
+            },
+            {
+                "nome": "Cal\u00e7a",
+                "preco": 80.0,
+                "categoria": "Vestu\u00e1rio"
+            }
+        ],
+        "quantidades": {
+            "Camisa": 2,
+            "Cal\u00e7a": 1
+        },
+        "cliente": "Jonas",
+        "status": "Novo"
+    },
+    {
+        "produtos": [
+            {
+                "nome": "T\u00eanis",
+                "preco": 110.0,
+                "categoria": "Vestu\u00e1rio"
+            },
+            {
+                "nome": "Celular",
+                "preco": 4500.0,
+                "categoria": "Eletr\u00f4nico"
+            }
+        ],
+        "quantidades": {
+            "T\u00eanis": 2,
+            "Celular": 1
+        },
+        "cliente": "Diego",
+        "status": "Antigo"
+    }
+]

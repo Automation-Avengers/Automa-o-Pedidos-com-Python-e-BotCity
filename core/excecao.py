@@ -1,4 +1,3 @@
-
 class ValorInvalidoError(Exception):
     pass
 

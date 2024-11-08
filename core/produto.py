@@ -1,4 +1,4 @@
-from excecao import ValorInvalidoError
+from core.excecao import ValorInvalidoError
 
 
 class Produto:
