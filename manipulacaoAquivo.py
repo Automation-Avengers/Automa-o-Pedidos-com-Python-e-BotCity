@@ -16,12 +16,12 @@ def carregar_dados_json(arquivo="pedidos.json"):
         print(f"O arquivo {arquivo} não foi encontrado.")
         return []
 
-def salvar_dados_binario(pedidos, arquivo="pedidos.bin"):
+def salvar_dados_binario(pedidos, arquivo="pedidos.pkl"):
     with open(arquivo, 'wb') as file:
         pickle.dump(pedidos, file)
     print(f"Dados salvos em {arquivo}.")
 
-def carregar_dados_binario(arquivo="pedidos.bin"):
+def carregar_dados_binario(arquivo="pedidos.pkl"):
     try:
         with open(arquivo, 'rb') as file:
             return pickle.load(file)

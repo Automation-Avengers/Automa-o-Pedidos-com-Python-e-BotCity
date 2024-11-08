@@ -37,8 +37,8 @@ class GestorDePedidos:
     def carregar_dados_json(self, arquivo="pedidos.json"):
         self.pedidos = manipulacaoAquivo.carregar_dados_json(arquivo)
 
-    def salvar_dados_binario(self, arquivo="pedidos.bin"):
+    def salvar_dados_binario(self, arquivo="pedidos.pkl"):
         manipulacaoAquivo.salvar_dados_binario(self.pedidos, arquivo)
 
-    def carregar_dados_binario(self, arquivo="pedidos.bin"):
+    def carregar_dados_binario(self, arquivo="pedidos.pkl"):
         self.pedidos = manipulacaoAquivo.carregar_dados_binario(arquivo)
