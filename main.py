@@ -2,7 +2,6 @@ from core.Gestao_pedidos import GestorDePedidos
 from core.pedido import Pedido
 from core.produto import Produto
 
-
 def main():
     try:
         produto1 = Produto("Camisa", 50.0, "Vestuário")
@@ -16,16 +15,19 @@ def main():
 
         produtos2 = [produto3, produto4]
         quantidade2 = {produto3: 2, produto4: 1}
-        pedido2 = Pedido(produtos2, quantidade2, "Diego", status="Antigo")
+        pedido2 = Pedido(produtos2, quantidade2, "Diego", status="Processando")
 
         gestor = GestorDePedidos()
         gestor.adicionar_pedido(pedido1)
         gestor.adicionar_pedido(pedido2)
         pedidos_novos = gestor.listar_pedidos_por_status("Novo")
-        pedidos_antigos = gestor.listar_pedidos_por_status("Antigo")
+        pedidos_antigos = gestor.listar_pedidos_por_status("Processando")
 
-        print("Pedidos com status 'Novo':", [p.detalhes_pedido() for p in pedidos_novos])
-        print("Pedidos com status 'Antigo':", [p.detalhes_pedido() for p in pedidos_antigos])
+        print("\nPedidos com status 'Novo':\n")
+        print("\n".join(p.detalhes_pedido() for p in pedidos_novos))
+
+        print("\nPedidos com status 'Antigo':\n")
+        print("\n".join(p.detalhes_pedido() for p in pedidos_antigos))
 
         gestor.salvar_dados_json()
         gestor.carregar_dados_json()

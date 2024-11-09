@@ -4,12 +4,25 @@ from datetime import datetime
 from core.pedido import Pedido
 import core.manipulacaoAquivo
 
-
 def log_atividade(func):
     def wrapper(*args, **kwargs):
-        result = func(*args, **kwargs)
-        print(f"[LOG] {datetime.now()} - Executou: {func} | Args: {args[1:]} | Retorno: {result}")
-        return result
+        resultado = func(*args, **kwargs)
+        
+        if isinstance(resultado, list) and all(isinstance(p, Pedido) for p in resultado):
+            resultado_info = [
+                f"Cliente: {p.cliente}, Status: {p.status}, Total: R$ {p.total_pedido():.2f}"
+                for p in resultado
+            ]
+        else:
+            resultado_info = resultado
+        
+        pedidos_info = ", ".join(
+            f"Cliente: {pedido.cliente}, Status: {pedido.status}" 
+            for pedido in args[1:] if isinstance(pedido, Pedido)
+        )
+        
+        print(f"[LOG] {datetime.now()} - Executou: {func.__name__} | Args: {pedidos_info} | Retorno: {resultado_info}")
+        return resultado
     return wrapper
 
 class GestorDePedidos:

@@ -18,7 +18,7 @@ class Pedido:
     def detalhes_pedido(self):
         detalhes = f"Cliente: {self.cliente}\nStatus: {self.status}\n"
         detalhes += "\n".join(f"{produto.detalhes()} - Quantidade: {self.quantidade[produto]}" for produto in self.produtos)
-        detalhes += f"\nTotal: {self.total_pedido()}"
+        detalhes += f"\nTotal: R$ {self.total_pedido()}"
         return detalhes
 
     def to_dict(self):
