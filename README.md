@@ -1,5 +1,15 @@
 # Exercício Integrado de Orientação a Objetos, Programação Funcional, RPA com BotCity, Arquivos Binários e Tratamento de Exceções
 
+# Equipe: Automation Avengers
+
+## Membros da Equipe
+
+- **Antonio Fernandes**
+- **Diego Raposo**
+- **Jonas Santos**
+- **Sabrina Frazão**
+
+
 Este projeto simula a gestão de pedidos de uma loja virtual fictícia utilizando Python. Ele aplica conceitos de programação orientada a objetos, programação funcional, automação com BotCity e manipulação de arquivos em formatos JSON e binário. 
 
 ### Estrutura do Projeto
