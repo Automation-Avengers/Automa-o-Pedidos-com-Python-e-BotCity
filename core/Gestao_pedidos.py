@@ -8,13 +8,16 @@ def log_atividade(func):
     def wrapper(*args, **kwargs):
         resultado = func(*args, **kwargs)
         
-        if isinstance(resultado, list) and all(isinstance(p, Pedido) for p in resultado):
-            resultado_info = [
-                f"Cliente: {p.cliente}, Status: {p.status}, Total: R$ {p.total_pedido():.2f}"
-                for p in resultado
-            ]
+        if resultado is None:
+            resultado_info = f"Função {func.__name__} executada com sucesso (sem retorno)."
         else:
-            resultado_info = resultado
+            if isinstance(resultado, list) and all(isinstance(p, Pedido) for p in resultado):
+                resultado_info = [
+                    f"Cliente: {p.cliente}, Status: {p.status}, Total: R$ {p.total_pedido():.2f}"
+                    for p in resultado
+                ]
+            else:
+                resultado_info = resultado
         
         pedidos_info = ", ".join(
             f"Cliente: {pedido.cliente}, Status: {pedido.status}" 
@@ -24,6 +27,7 @@ def log_atividade(func):
         print(f"[LOG] {datetime.now()} - Executou: {func.__name__} | Args: {pedidos_info} | Retorno: {resultado_info}")
         return resultado
     return wrapper
+
 
 class GestorDePedidos:
     def __init__(self):

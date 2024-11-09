@@ -3,9 +3,11 @@ from core.excecao import QuantidadeInvalidaError
 from core.produto import Produto
 
 class Pedido:
+    STATUS_POSSEIS = ["Novo", "Processando", "Enviado"]
+
     def __init__(self, produtos, quantidade, cliente, status="Novo"):
-        if any(q <= 0 for q in quantidade.values()):
-            raise QuantidadeInvalidaError("A quantidade deve ser positiva para todos os produtos.")
+        if status not in Pedido.STATUS_POSSEIS:
+            raise ValueError(f"Status inválido. Os valores possíveis são: {', '.join(Pedido.STATUS_POSSEIS)}")
         
         self.produtos = produtos  
         self.quantidade = quantidade  
