@@ -2,7 +2,7 @@
 
 ## 1. Tratamento de Exceções: Como o uso de exceções melhorou a robustez da aplicação?
 
-Sim, o uso de exceções melhorou a robustez da aplicação das seguintes formas:
+O uso de exceções melhorou a robustez da aplicação das seguintes formas:
 
 - **Validação de Dados**: Exceções garantem que apenas dados válidos sejam processados, evitando erros futuros.
 - **Clareza no Código**: Exceções personalizadas tornam mais fácil identificar e entender problemas específicos, melhorando a legibilidade.
